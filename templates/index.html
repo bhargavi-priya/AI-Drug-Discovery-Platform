@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Drug Discovery Platform</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header>
+
+<nav>
+
+<h1>🧬 AI Drug Discovery</h1>
+
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/virtual_screening">Virtual Screening</a></li>
+<li><a href="/drug_library">Drug Library</a></li>
+<li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1 style="font-size:48px;color:#1b3a57;">
+AI-Powered Drug Discovery Platform
+</h1>
+
+<br>
+
+<p style="font-size:22px;">
+
+Analyze Protein Sequences • Evaluate Drug Molecules •
+Predict Drug-Likeness • Generate Professional Reports
+
+</p>
+
+<br><br>
+
+<a href="/virtual_screening">
+<button style="font-size:20px;padding:15px 35px;">
+🚀 Start Analysis
+</button>
+</a>
+
+</section>
+
+<section
+style="
+width:90%;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin-top:40px;
+">
+
+<div class="upload-card">
+
+<h2>🧬 Protein Analysis</h2>
+
+<br>
+
+<p>
+
+Upload FASTA or PDB protein files and obtain sequence
+statistics, amino acid composition and visualization.
+
+</p>
+
+</div>
+
+<div class="upload-card">
+
+<h2>💊 Drug Analysis</h2>
+
+<br>
+
+<p>
+
+Analyze molecular weight, LogP, TPSA,
+Hydrogen Bond Donors and Acceptors.
+
+</p>
+
+</div>
+
+<div class="upload-card">
+
+<h2>📊 Visualization</h2>
+
+<br>
+
+<p>
+
+Generate amino acid composition charts and
+2D chemical structure images automatically.
+
+</p>
+
+</div>
+
+<div class="upload-card">
+
+<h2>📄 PDF Report</h2>
+
+<br>
+
+<p>
+
+Download a complete report containing
+protein analysis and drug descriptors.
+
+</p>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+
+© 2026 AI Drug Discovery Platform |
+Developed using Flask, BioPython & RDKit
+
+</p>
+
+</footer>
+
+</body>
+
+</html>

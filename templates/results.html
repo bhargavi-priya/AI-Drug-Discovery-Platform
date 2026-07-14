@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Drug Discovery Results</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <h1>🧬 AI Drug Discovery</h1>
+
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/virtual_screening">Virtual Screening</a></li>
+            <li><a href="/drug_library">Drug Library</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+<section class="hero">
+
+<h2>Protein & Drug Analysis Results</h2>
+
+<div class="upload-card">
+
+<h3>🧬 Protein Information</h3>
+
+<p><strong>File Name:</strong> {{ protein_name }}</p>
+<p><strong>Protein ID:</strong> {{ protein_id }}</p>
+<p><strong>Sequence Length:</strong> {{ sequence_length }} amino acids</p>
+
+<p><strong>First 50 Amino Acids:</strong></p>
+<p>{{ sequence_preview }}</p>
+
+<hr>
+
+<h3>🧬 Amino Acid Composition</h3>
+
+<table border="1" cellpadding="8" cellspacing="0" style="margin:auto;">
+
+<tr>
+    <th>Amino Acid</th>
+    <th>Count</th>
+</tr>
+
+{% for aa, count in amino_acid_counts.items() %}
+<tr>
+    <td>{{ aa }}</td>
+    <td>{{ count }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<br>
+
+{% if chart_image %}
+
+<h3>📊 Amino Acid Composition Chart</h3>
+
+<img
+src="{{ url_for('static', filename=chart_image) }}"
+alt="Amino Acid Chart"
+width="700">
+
+{% endif %}
+
+<hr>
+
+<h3>💊 Drug Information</h3>
+
+<p><strong>Drug File:</strong> {{ drug_name }}</p>
+
+<p><strong>Molecular Weight:</strong> {{ molecular_weight }} g/mol</p>
+
+<p><strong>LogP:</strong> {{ logp }}</p>
+
+<p><strong>TPSA:</strong> {{ tpsa }}</p>
+
+<p><strong>Hydrogen Bond Donors:</strong> {{ h_donors }}</p>
+
+<p><strong>Hydrogen Bond Acceptors:</strong> {{ h_acceptors }}</p>
+
+<p><strong>Status:</strong> Uploaded Successfully ✅</p>
+
+<hr>
+
+{% if molecule_image %}
+
+<h3>🧪 2D Chemical Structure</h3>
+
+<img
+src="{{ url_for('static', filename=molecule_image) }}"
+alt="Molecule Structure"
+width="400">
+
+{% endif %}
+
+<hr>
+
+<h3>🧬 Lipinski Rule of Five</h3>
+
+<table border="1" cellpadding="8" cellspacing="0" style="margin:auto;">
+
+<tr>
+    <th>Property</th>
+    <th>Recommended</th>
+    <th>Your Drug</th>
+</tr>
+
+<tr>
+    <td>Molecular Weight</td>
+    <td>&lt; 500</td>
+    <td>{{ molecular_weight }}</td>
+</tr>
+
+<tr>
+    <td>LogP</td>
+    <td>&lt; 5</td>
+    <td>{{ logp }}</td>
+</tr>
+
+<tr>
+    <td>H-Bond Donors</td>
+    <td>&le; 5</td>
+    <td>{{ h_donors }}</td>
+</tr>
+
+<tr>
+    <td>H-Bond Acceptors</td>
+    <td>&le; 10</td>
+    <td>{{ h_acceptors }}</td>
+</tr>
+
+</table>
+
+<br>
+
+<h2>{{ lipinski_result }}</h2>
+
+<h3>⭐ Lipinski Score: {{ lipinski_score }}/4</h3>
+
+<hr>
+
+<h3>📋 Final AI Screening Summary</h3>
+
+{% if lipinski_score == 4 %}
+<p style="color:green;">
+✅ This compound satisfies all Lipinski Rule of Five criteria and is an excellent candidate for further computational drug discovery studies.
+</p>
+
+{% elif lipinski_score == 3 %}
+<p style="color:green;">
+🟢 This compound satisfies most drug-likeness criteria and appears to be a promising candidate.
+</p>
+
+{% elif lipinski_score == 2 %}
+<p style="color:orange;">
+🟡 This compound partially satisfies Lipinski's criteria. Further optimization may be required.
+</p>
+
+{% else %}
+<p style="color:red;">
+🔴 This compound fails multiple Lipinski criteria and is less suitable as an oral drug candidate.
+</p>
+{% endif %}
+
+<br>
+
+<a href="/download_report">
+    <button>📄 Download PDF Report</button>
+</a>
+
+<br><br>
+
+<a href="/virtual_screening">
+    <button>⬅ Back to Virtual Screening</button>
+</a>
+
+</div>
+
+</section>
+
+</main>
+
+</body>
+
+</html>
